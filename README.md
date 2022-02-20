@@ -1,4 +1,5 @@
 # brewery-passport
+It's Friday night -- 7pm. Let's get crazy. Let's learn a new  FE framework in 90 mins. The project is a simple ideabox hitting a brewery api. How far can we get?
 
 ## Project setup
 ```
