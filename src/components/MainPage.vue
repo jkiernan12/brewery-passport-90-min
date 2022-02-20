@@ -9,7 +9,7 @@
         <p>{{brewery.street}}, {{brewery.city}} {{brewery.state}}</p>
         <p>Brewery Type: {{brewery.brewery_type}}</p>
         <a v-bind:href="brewery.website_url" target="_blank">Learn more</a>
-        <button>Mark as Visited</button>
+        <button @click="addVisited(brewery.id)">Mark as Visited</button>
         </div>
       </div>
     </div>
@@ -51,8 +51,10 @@ export default {
         this.error = String(err)
       })
     },
-    addVisited() {
-
+    addVisited(id) {
+      let selectedIndex = this.unvisited.findIndex(el => el.id === id)
+      let selectedBrewery = this.unvisited.splice(selectedIndex, 1)
+      this.visited = [...this.visited, ...selectedBrewery]
     }
   }
 }
