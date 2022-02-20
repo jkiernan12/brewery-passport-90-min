@@ -1,7 +1,13 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    Beer info here
+    <div v-if="pageData" class="brewery-container">
+      {{pageData[0].name}}
+      <div v-for="brewery in pageData" v-bind:key="brewery.id">
+        {{brewery.name}}
+      </div>
+    </div>
+    <div v-if="loading">Loading</div>
   </div>
 </template>
 
@@ -19,7 +25,7 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+      this.fetchData()
   },
   methods: {
     fetchData() {
@@ -56,5 +62,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.brewery-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
