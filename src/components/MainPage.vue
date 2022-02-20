@@ -1,13 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div v-if="pageData" class="brewery-container">
-      <div v-for="brewery in pageData" v-bind:key="brewery.id">
+    <button>Show Visited</button>
+    <div v-if="unvisited" class="brewery-container">
+      <div v-for="brewery in unvisited" v-bind:key="brewery.id">
         <div class="brewery-card">
         <h3>{{brewery.name}}</h3>
         <p>{{brewery.street}}, {{brewery.city}} {{brewery.state}}</p>
         <p>Brewery Type: {{brewery.brewery_type}}</p>
         <a v-bind:href="brewery.website_url" target="_blank">Learn more</a>
+        <button>Mark as Visited</button>
         </div>
       </div>
     </div>
@@ -26,6 +28,8 @@ export default {
       loading: false,
       post: null,
       error: null,
+      visited: [],
+      unvisited: []
     }
   },
   created() {
@@ -40,12 +44,15 @@ export default {
       .then(res => res.json())
       .then(data => {
         this.loading = false
-        this.pageData = data
-        console.log(this.pageData)
+        this.unvisited = [...data]
+        console.log(this.unvisited)
       })
       .catch(err => {
         this.error = String(err)
       })
+    },
+    addVisited() {
+
     }
   }
 }
@@ -71,11 +78,20 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: stretch;
 }
 .brewery-card {
 border: 2px solid black;
 width: 400px;
-height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+margin: 20px;
+}
+
+button {
+  padding: 5px 20px;
+  margin: 10px;
+
 }
 </style>
