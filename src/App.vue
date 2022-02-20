@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img alt="Vue logo" class="beer-logo" src="./assets/beer-icon.svg">
   <MainPage msg="Brewery Passport"/>
 </template>
 
@@ -22,5 +22,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.beer-logo {
+  max-width: 300px;
 }
 </style>

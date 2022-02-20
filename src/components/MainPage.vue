@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button>Show Visited</button>
+    <button v-on:click="displayVisited">Show Visited</button>
     <div v-if="unvisited" class="brewery-container">
       <div v-for="brewery in unvisited" v-bind:key="brewery.id">
         <div class="brewery-card">
@@ -10,6 +10,17 @@
         <p>Brewery Type: {{brewery.brewery_type}}</p>
         <a v-bind:href="brewery.website_url" target="_blank">Learn more</a>
         <button @click="addVisited(brewery.id)">Mark as Visited</button>
+        </div>
+      </div>
+    </div>
+    <div v-if="showVisited" class="brewery-container">
+      <div v-for="brewery in visited" v-bind:key="brewery.id">
+        <div class="brewery-card visited">
+        <h3>{{brewery.name}}</h3>
+        <p>{{brewery.street}}, {{brewery.city}} {{brewery.state}}</p>
+        <p>Brewery Type: {{brewery.brewery_type}}</p>
+        <a v-bind:href="brewery.website_url" target="_blank">Learn more</a>
+        <!-- <button @click="addVisited(brewery.id)">Mark as Visited</button> -->
         </div>
       </div>
     </div>
@@ -29,7 +40,8 @@ export default {
       post: null,
       error: null,
       visited: [],
-      unvisited: []
+      unvisited: [],
+      showVisited: false
     }
   },
   created() {
@@ -55,6 +67,9 @@ export default {
       let selectedIndex = this.unvisited.findIndex(el => el.id === id)
       let selectedBrewery = this.unvisited.splice(selectedIndex, 1)
       this.visited = [...this.visited, ...selectedBrewery]
+    },
+    displayVisited() {
+      this.showVisited = true
     }
   }
 }
@@ -94,6 +109,9 @@ margin: 20px;
 button {
   padding: 5px 20px;
   margin: 10px;
+}
 
+.visited {
+  background-color: lightgreen;
 }
 </style>
